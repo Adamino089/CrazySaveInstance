@@ -2873,7 +2873,7 @@ end)
 		elseif IsModel then
 			placename = sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
 		else
-placename = sanitizeFileName(GameName .. " (Decompile)")
+            placename = sanitizeFileName(GameName .. " Decompile")
 		end
 
 		if OPTIONS.AvoidFileOverwrite and isfile then
@@ -3958,32 +3958,8 @@ value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://dis
 
 		print("Fixed.")
 
-		This file was generated with the following settings:
 		]]
-					.. service.HttpService:JSONEncode(OPTIONS)
-					.. "\n\n\t\tElapsed time: "
-					.. os.clock() - elapse_t
-					.. " Date (UTC): "
-					.. DateTime.now():FormatUniversalTime("LL LTS", "en-gb")
-					.. " PlaceId: "
-					.. game.PlaceId
-					.. " PlaceVersion: "
-					.. game.PlaceVersion
-					.. " Client Version: "
-					.. FULL_VERSION
-					.. " Platform: "
-					.. (
-						select(
-							2,
-							pcall(function()
-								return service.UserInputService:GetPlatform().Name -- Won't work on lvl 2 execs but we can safely assume they're on PC (and likely Windows)
-							end)
-						) or "Unknown"
-					)
-					.. " Executor: "
-					.. (identify_executor and table.concat({ identify_executor() }, " ") or "Unknown")
-					.. "\n]]"
-			)
+			
 		end
 		do
 			local tmp = { "<SharedStrings>" }
