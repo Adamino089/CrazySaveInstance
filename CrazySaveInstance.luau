@@ -3414,14 +3414,6 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 
 	local gethiddenproperty_fallback
 
-local function getPath(obj)
-    if obj.Parent == nil then
-        return "Nil parented"
-    else
-        return obj:GetFullName()
-    end
-end
-
 	local function save_hierarchy(hierarchy)
 		for _, instance in hierarchy do
 			local InstanceOverride, ClassTagOverride, ClassNameOverride
@@ -3749,7 +3741,7 @@ end
 										end
 
 										value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n\n"
-                                            .. "-- Script Path: " .. getPath(instance) .. "\n"
+                                            .. "-- Script Path: " .. (instance.Parent == nil and "Nil parented" or instance:GetFullName()) .. "\n"
 											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
 											.. value
 									end
