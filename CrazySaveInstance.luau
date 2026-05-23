@@ -3748,7 +3748,7 @@ placename = sanitizeFileName(GameName .. " Decompile")
 value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n"
     .. "-- Script Path: " .. (instance.Parent == nil and "Nil parented" or instance:GetFullName()) .. "\n"
     .. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n" or "")
-    .. "\n\n"
+    .. "\n\"
     .. value
 									end
 								end
