@@ -3414,6 +3414,14 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 
 	local gethiddenproperty_fallback
 
+local function getPath(obj)
+    if obj.Parent == nil then
+        return "Nil parented"
+    else
+        return obj:GetFullName()
+    end
+end
+
 	local function save_hierarchy(hierarchy)
 		for _, instance in hierarchy do
 			local InstanceOverride, ClassTagOverride, ClassNameOverride
