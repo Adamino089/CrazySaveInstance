@@ -2831,10 +2831,13 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		local tmp = table.clone(OPTIONS.ExtraInstances)
 
 		local PlaceName = game.PlaceId
+        local GameName = tostring(PlaceId)
+        local PlaceName = GameName
 
-		pcall(function()
-			PlaceName ..= " " .. service.MarketplaceService:GetProductInfoAsync(PlaceName).Name
-		end)
+pcall(function()
+    GameName = service.MarketplaceService:GetProductInfoAsync(PlaceId).Name
+    PlaceName = PlaceId .. " " .. GameName
+end)
 
 		local function sanitizeFileName(str)
 			return string.sub(string.gsub(string.gsub(string.gsub(str, "[^%w _]", ""), " +", " "), " +$", ""), 1, 240)
@@ -2865,10 +2868,9 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		if FilePath then
 			placename = FilePath
 		elseif IsModel then
-			placename =
-				sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
+			placename = sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
 		else
-			placename = sanitizeFileName("place " .. PlaceName)
+placename = sanitizeFileName(GameName .. " (Decompile)")
 		end
 
 		if OPTIONS.AvoidFileOverwrite and isfile then
@@ -3743,6 +3745,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 										value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n\n"
                                             .. "-- Script Path: " .. (instance.Parent == nil and "Nil parented" or instance:GetFullName()) .. "\n"
 											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
+                                            .. "/n"
 											.. value
 									end
 								end
