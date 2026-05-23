@@ -3741,6 +3741,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 										end
 
 										value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n\n"
+                                            .. "-- Script Path: " .. getPath(instance) .. "\n"
 											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
 											.. value
 									end
