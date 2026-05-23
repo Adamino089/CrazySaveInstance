@@ -2873,7 +2873,7 @@ end)
 		elseif IsModel then
 			placename = sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
 		else
-placename = sanitizeFileName(GameName .. " Decompile")
+placename = sanitizeFileName(GameName .. " (Decompile)")
 		end
 
 		if OPTIONS.AvoidFileOverwrite and isfile then
