@@ -2830,13 +2830,16 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		local mode = string.lower(OPTIONS.mode)
 		local tmp = table.clone(OPTIONS.ExtraInstances)
 
-		local PlaceName = game.PlaceId
-        local GameName = tostring(PlaceId)
-        local PlaceName = GameName
+local PlaceId = game.PlaceId
+local GameName = tostring(PlaceId)
+local PlaceName = GameName
 
 pcall(function()
-    GameName = service.MarketplaceService:GetProductInfoAsync(PlaceId).Name
-    PlaceName = PlaceId .. " " .. GameName
+    local info = service.MarketplaceService:GetProductInfoAsync(PlaceId)
+    if info and info.Name and info.Name ~= "" then
+        GameName = info.Name
+        PlaceName = PlaceId .. " " .. GameName
+    end
 end)
 
 		local function sanitizeFileName(str)
@@ -2870,7 +2873,7 @@ end)
 		elseif IsModel then
 			placename = sanitizeFileName("model " .. PlaceName .. " " .. (ToSaveInstance or tmp[1] or game):GetFullName())
 		else
-placename = sanitizeFileName(GameName .. " (Decompile)")
+placename = sanitizeFileName(GameName .. " Decompile")
 		end
 
 		if OPTIONS.AvoidFileOverwrite and isfile then
@@ -3742,11 +3745,11 @@ placename = sanitizeFileName(GameName .. " (Decompile)")
 											end
 										end
 
-										value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n\n"
-                                            .. "-- Script Path: " .. (instance.Parent == nil and "Nil parented" or instance:GetFullName()) .. "\n"
-											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
-                                            .. "/n"
-											.. value
+value = "-- Saved by CrazySaveInstance (Join for decompiler updates) https://discord.gg/crazysaveinstance\n"
+    .. "-- Script Path: " .. (instance.Parent == nil and "Nil parented" or instance:GetFullName()) .. "\n"
+    .. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n" or "")
+    .. "\n\n"
+    .. value
 									end
 								end
 								value = XML_Descriptors.__PROTECTEDSTRING(value)
